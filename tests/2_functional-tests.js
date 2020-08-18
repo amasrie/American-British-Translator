@@ -24,8 +24,14 @@ suite('Functional Tests', () => {
       `<span class="highlight">...</span>` tags when the "Translate" button is pressed.
     */
     test("Translation appended to the `translated-sentence` `div`", done => {
-
-      // done();
+      const input = "The car boot sale at Boxted Airfield was called off.";
+      const output = "The <span class=\"highlight\">swap meet</span> at Boxted Airfield was called off.";
+      Translator.setText(input);
+      Translator.setOption(false);
+      Translator.translateButton();
+      let translation = Translator.getTranslation();
+      assert.equal(translation, output);
+      done();
     });
 
     /* 
@@ -34,8 +40,12 @@ suite('Functional Tests', () => {
       `translated-sentence` `div` when the "Translate" button is pressed.
     */
     test("'Everything looks good to me!' message appended to the `translated-sentence` `div`", done => {
-
-      // done();
+      const input = "This sentence have no translation.";
+      const output = "Everything looks good to me!";
+      Translator.setText(input);
+      let answer = Translator.translateButton();
+      assert.equal(answer, output);
+      done();
     });
 
     /* 
@@ -44,8 +54,12 @@ suite('Functional Tests', () => {
       the `error-msg` `div`.
     */
     test("'Error: No text to translate.' message appended to the `translated-sentence` `div`", done => {
-
-      // done();
+      const input = "";
+      const output = "Error: No text to translate.";
+      Translator.setText(input);
+      let answer = Translator.translateButton();
+      assert.equal(answer, output);
+      done();
     });
 
   });
@@ -56,8 +70,14 @@ suite('Functional Tests', () => {
       `divs` are cleared when the "Clear" button is pressed.
     */
     test("Text area, `translated-sentence`, and `error-msg` are cleared", done => {
-
-      // done();
+      Translator.clearButton();
+      let translation = Translator.getTranslation();
+      let area = Translator.getArea();
+      let error = Translator.getError();
+      assert.equal(translation, "");
+      assert.equal(area, "");
+      assert.equal(error, "");
+      done();
     });
 
   });
